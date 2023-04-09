@@ -22,11 +22,25 @@ class GameSprite(sprite.Sprite):
 class Player(GameSprite):
     def update(self):
         key_pressed = key.get_pressed()
-        if key_pressed[K_LEFT] and self.rect.x > 0:
-            self.rect.x -= self.speed
+        if key_pressed[K_UP] and self.rect.y > 0:
+            self.rect.y -= self.speed
 
-        if key_pressed[K_RIGHT] and self.rect.x < 600:
-            self.rect.x += self.speed
+        if key_pressed[K_DOWN] and self.rect.y < 420:
+            self.rect.y += self.speed
+
+
+    def update2(self):
+        key_pressed = key.get_pressed()
+        if key_pressed[K_w] and self.rect.y > 0:
+            self.rect.y -= self.speed
+
+        if key_pressed[K_s] and self.rect.y < 420:
+            self.rect.y += self.speed
+
+
+player1 = Player('rocket.png', 630, 400, 10, 80, 80)
+player2 = Player('rocket.png', 0, 400, 10, 80, 80)
+ball = Player('ball.png', 200, 400, 0, 80, 60)
 
 game = True
 while game:
@@ -35,5 +49,16 @@ while game:
             game = False
     window.fill((50, 20, 100))
 
+    player1.reset()
+    player1.update()
+
+    player2.reset()
+    player2.update2()
+
+    ball.reset()
+
+
     display.update()
     clock.tick(60)
+
+
